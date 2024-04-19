@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sign-up</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+</head>
+<body>
+<h1>
+    <div class = "container-fluid bg-success text-white rounded">
+        Signup
+    </div>
+    <br><br>
+</h1>
+<h3> Welcome. We would be honored if you signed up using the form below</h3>
+<div class = "container">
+    <form method = "POST" action = {{url_for('signup')}} id = "signup form">
+    <div class = "row">
+        <label> Username:</label>
+        <input type = "text" name = "USER_NAME"/>
+    </div>
+        <div class = "row">
+    <label> Password:</label>
+    <input type = "password" name = "PASSWORD"/>
+        </div>
+        <div class = "row">
+    <label> Reconfirm Password</label>
+    <input type = "password" name = "PASSWORD_CONFIRMATION"/>
+        </div>
+        <br>
+    <div class = "row">
+        <input type = "submit"/>
+    </div>
+</form>
+</div>
+<br>
+{{message}}
+</body>
+</html>

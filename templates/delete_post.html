@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Delete post</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <style>
+        .SCALED_IMG {
+            width: 250px;
+            height: 250px;
+            object-fit:scale;
+            }
+    </style>
+</head>
+<body>
+<h1>
+    <div class = "container-fluid rounded bg-success text-white">
+        Are you sure you want to delete this post, {{USER.USER_NAME}}?
+    </div>
+</h1>
+<div class = "container">
+<p class = "row">
+    {{POST.POST_TITLE}}
+</p>
+<p class = "row">
+    <textarea rows="25" cols="100" wrap = "hard"> {{POST.POST_CONTENT}} </textarea>
+</p>
+<p>
+    <img class = "SCALED_IMG" src = {{url_for('static',filename='POST_IMAGE%d.png' %POST.POST_ID)}}>
+</p>
+<form method = "POST" action = {{url_for('delete_post', USER_ID=USER.USER_ID, POST_ID = POST.POST_ID)}} id = "delete_post">
+    <p>
+    <input type = "radio" name = "CONFIRMATION" value = "Y" /> <label> Yes</label> &emsp; &emsp;
+    <input type = "radio" name = "CONFIRMATION" value = "N" /> <label> Scratch that</label>
+    </p>
+    <p class = "row">
+    <input type = "submit" value = "I've decided" />
+    </p>
+</form>
+</div>
+<p class = "container-fluid ">
+<div class = "row bg-warning">
+    <div class="col">
+    <a href = {{url_for('all_posts', USER_ID = USER.USER_ID)}}> View all your posts </a>
+</div>
+<div class = "col">
+    <a href={{url_for('post', USER_ID = USER.USER_ID, POST_ID = POST.POST_ID)}}> Back to post {{POST.POST_TITLE}} </a>
+</div>
+</div>
+</p>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{VIEWED.USER_NAME}} Posts</title>
+    <style>
+        .SCALED_IMG {
+            width: 50px;
+            height: 50px;
+            object-fit:scale;
+            }
+    </style>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+</head>
+<body>
+<h1>
+    <div class = "container-fluid rounded bg-success text-white">
+    {% if POSTS|length %}
+    Here are {{VIEWED.USER_NAME}}'s posts
+    {% else %}
+    It appears {{VIEWED.USER_NAME}} has not posted anything yet.
+    {% endif %}
+    </div>
+</h1>
+<div class = "container-lg">
+    {% for POST in POSTS %}
+    <div class = "row bg-light">
+        <a href={{url_for('post', USER_ID = USER.USER_ID, POST_ID = POST.POST_ID)}}>
+            <h1>
+                {{POST.POST_TITLE}}
+            </h1>
+            <p>
+                <img class = "SCALED_IMG" src = {{url_for('static',filename='POST_IMAGE%d.png' %POST.POST_ID)}}>
+            </p>
+        </a>
+        <br>
+        Likes = {{POST.POST_LIKES}}     Dislikes = {{POST.POST_DISLIKES}}
+    </div>
+    <br>
+    {% endfor %}
+</div>
+<div class = "row bg-warning">
+<p class = "col">
+    <a href = {{url_for('profile_viewed', USER_ID = USER.USER_ID, VIEWED_ID = VIEWED.USER_ID)}} > Visit {{VIEWED.USER_NAME}}'s profile?</a>
+</P>
+<p class = "col">
+<a href = {{url_for('profile', USER_ID = USER.USER_ID)}}>Go to your own profile</a>
+</p>
+<p class = "col">
+    <a href = {{url_for('feed', USER_ID = USER.USER_ID)}}> Go to your Feed</a>
+</p>
+<p class = "col">
+    <a href = {{url_for('logout', USER_ID = USER.USER_ID)}}> Logout</a>
+</p>
+</div>
+</body>
+</html>

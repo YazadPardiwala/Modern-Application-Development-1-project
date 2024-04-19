@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Feed</title>
+    <style>
+        .SCALED_IMG {
+            width: 50px;
+            height: 50px;
+            object-fit:scale;
+            }
+    </style>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+</head>
+<body>
+<h1>
+    <div class = "container-fluid rounded bg-success text-white">
+        Welcome to your Feed
+    </div>
+</h1>
+{% for FOLLOW_POST in POSTS %}
+{% for POST in FOLLOW_POST %}
+<div class = "container bg-light" >
+<a href = {{url_for('post', USER_ID = USER.USER_ID, POST_ID = POST.POST_ID)}} >
+<h2>
+    {{POST.POST_TITLE}}
+</h2>
+<p>
+    <img class = "SCALED_IMG" src = {{url_for('static',filename='POST_IMAGE%d.png' %POST.POST_ID)}}>
+</p>
+</a>
+{% for AUTHOR in POST["AUTHOR"]%}
+    <div class = "row bg-warning">
+        Written by <a href = {{url_for('profile_viewed', USER_ID = USER.USER_ID, VIEWED_ID = AUTHOR['USER_ID'])}}> {{AUTHOR["USER_NAME"]}} </a>
+    </div>
+{% endfor %}
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+</div>
+<br>
+{% endfor %}
+{% endfor %}
+<div class = "row bg-warning">
+<p class = "col">
+    <a href = {{url_for('create_post', USER_ID = USER.USER_ID)}}> Create a post yourself?</a>
+</p>
+<p class = "col">
+    <a href = {{url_for('profile', USER_ID = USER.USER_ID)}}>Go to your Profile</a>
+</p>
+<p class = "col">
+    <a href = {{url_for('logout', USER_ID = USER.USER_ID)}}> Logout</a>
+</p>
+</div>
+</body>
+</html>

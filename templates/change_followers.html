@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Change_followers</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+</head>
+<body>
+<h1>
+  <div class = "container-fluid rounded bg-success text-white">
+    Hello {{USER.USER_NAME}}
+  </div>
+</h1>
+<div class = "container-md">
+  <form action = {{url_for('change_followers', USER_ID = USER.USER_ID, VIEWED_ID = VIEWED.USER_ID)}} id = 'CHANGE_FOLLOWS_FORM' method = 'POST'>
+  {% if FOLLOWER.count() == 0 %}
+  <p>
+  <label> Do you wish to follow {{VIEWED.USER_NAME}}?</label> <br>
+    <input type = 'radio' name = 'FOLLOW' value = 'Y'/> Yes &emsp;
+    <input type = 'radio' name = 'FOLLOW' value = 'N'/> No
+  </p>
+  {% endif %}
+  {% if FOLLOWER.count() > 0 %}
+  <p>
+  <label> You already follow {{VIEWED.USER_NAME}}. Do you wish to unfollow them? </label> <br>
+    <input type = 'radio' name = 'UNFOLLOW' value = 'Y'/> Yes &emsp;
+    <input type = 'radio' name = 'UNFOLLOW' value = 'N'/> No
+  </p>
+  {% endif %}
+  {% if FOLLOWED.count() > 0 %}
+  <p>
+  <label> {{VIEWED.USER_NAME}} Already follows you. Do you wish to block them?</label> <br>
+    <input type = 'radio' name = 'BLOCK' value = 'Y' /> Yes &emsp;
+    <input type = 'radio' name = 'BLOCK' value = 'N' /> No
+  {%endif%}
+    <p><input type = 'submit' value = 'Confirm' />
+  </p>
+</form>
+</div>
+<div class = "row bg-warning">
+  <div class = "col">
+<a href= {{url_for('search_users', USER_ID = USER.USER_ID)}}> Search for other users? </a>
+</div>
+<div class = "col">
+  <a href = {{url_for('followers', USER_ID = USER.USER_ID)}}> View your followers </a>
+</div>
+<div class = "col">
+  <a href = {{url_for('followed', USER_ID = USER.USER_ID)}}> View the people you follow </a>
+</div>
+</div>
+</body>
+</html>

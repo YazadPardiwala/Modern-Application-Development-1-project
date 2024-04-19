@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Search Users</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+</head>
+<body>
+<h1>
+    <div class = "container-fluid bg-success text-white rounded">
+        Search for other users
+    </div>
+    <br>
+</h1>
+<h3>
+    Here are all our wonderful contributors (excepting yourself)
+</h3>
+<div class = "container-fluid">
+    {% for USERNO in ALL_USERS %}
+{% if USERNO.USER_ID != USER.USER_ID %}
+
+<div class = "row bg-light">
+    <p class = "col">
+    <a href = {{url_for('profile_viewed', USER_ID = USER.USER_ID, VIEWED_ID = USERNO.USER_ID)}} >{{USERNO.USER_NAME}} </a> &emsp;
+    </p>
+    <p class = "col">
+    <a href = {{url_for('all_posts_viewed', VIEWED_ID = USERNO.USER_ID, USER_ID = USER.USER_ID)}}> Number of posts - {{USERNO.POST_COUNT}} </a>
+    </p>
+    <p class = "col">
+    Followers - {{USERNO.FOLLOWER_COUNT}}
+    </p
+    <p class = "col">
+    <a href = {{url_for('change_followers', USER_ID = USER.USER_ID, VIEWED_ID = USERNO.USER_ID)}}>Click to follow/unfollow/block this user </a>
+    </p>
+</div>
+    <br>
+{% endif %} {% endfor %}
+</div>
+
+<div class = "container-fluid">
+<div class = "row bg-warning">
+<p class = "col">
+    <a href={{url_for('feed', USER_ID = USER.USER_ID)}}> Go to your feed</a>
+</p>
+    <p class = "col">
+    <a href = {{url_for('profile', USER_ID = USER.USER_ID)}}> Go to your profile </a>
+    </p>
+</div>
+</div>
+</body>
+</html>

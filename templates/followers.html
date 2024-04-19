@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Followers</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+</head>
+<body>
+<h2>
+    <div class = "container-fluid rounded bg-success text-white">
+    These people have decided to follow you {{USER.USER_NAME}}
+    </div>
+</h2>
+<div class = "container">
+{% for FOLLOWER in FOLLOWERS %}
+<div class = "row bg-light">
+    <div class = "col">
+        <a href = {{url_for('profile_viewed', USER_ID = USER.USER_ID, VIEWED_ID = FOLLOWER.USER_ID)}}> {{FOLLOWER.USER_NAME}} </a>
+    </div>
+    <div class = "w-100"></div>
+ <div class = "col">
+     Number of Followers {{FOLLOWER.FOLLOWER_COUNT}}
+ </div>
+ <div class = "col">
+     <a href = {{url_for('all_posts_viewed', VIEWED_ID = FOLLOWER.USER_ID, USER_ID = USER.USER_ID)}}> Number of Posts {{FOLLOWER.POST_COUNT}} </a>
+ </div>
+ <div class = "col">
+     <a href = {{url_for('change_followers', USER_ID = USER.USER_ID, VIEWED_ID = FOLLOWER.USER_ID)}}>Click to block this user </a>
+ </div>
+</div>
+<br>
+{% endfor %}
+</div>
+<div class = "container-fluid">
+    <div class ="row bg-warning">
+<p class = "col">
+    <a href= {{url_for('search_users', USER_ID = USER.USER_ID)}}> Look for other users? </a>
+</p>
+<p class = "col">
+    <a href = {{url_for('profile', USER_ID = USER.USER_ID)}}>Go to your Profile {{USER.USER_NAME}}?</a>
+</p>
+<p class = "col">
+    <a href = {{url_for('feed', USER_ID = USER.USER_ID)}}> Go to your Feed?</a>
+</p>
+<p class = "col">
+    <a href = {{url_for('logout', USER_ID = USER.USER_ID)}}> Logout </a>
+</p>
+    </div>
+</div>
+</body>
+</html>
